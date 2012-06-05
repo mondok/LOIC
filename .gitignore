@@ -13,3 +13,4 @@ _ReSharper.*
 NDependOut
 UpgradeLog.XML
 _UpgradeReport_Files
+*DotSettings*
