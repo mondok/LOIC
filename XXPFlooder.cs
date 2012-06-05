@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Linq;
 
 namespace LOIC
 {
@@ -15,6 +18,7 @@ namespace LOIC
 		public int Protocol;
 		public int Delay;
 		public bool Resp;
+	    public bool UseTerms;
 		public string Data;
 		private bool AllowRandom;
 
@@ -35,6 +39,7 @@ namespace LOIC
 			bw.DoWork += new DoWorkEventHandler(bw_DoWork);
 			bw.RunWorkerAsync();
 		}
+
 		private void bw_DoWork(object sender, DoWorkEventArgs e)
 		{
 			try

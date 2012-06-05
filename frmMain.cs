@@ -108,7 +108,7 @@ namespace LOIC
 					http = new HTTPFlooder[iThreads];
 					for (int a = 0; a < http.Length; a++)
 					{
-						http[a] = new HTTPFlooder(sHost, sIP, iPort, sSubsite, chkWaitReply.Checked, iDelay, iTimeout, chkAllowRandom.Checked, chkAllowGzip.Checked);
+						http[a] = new HTTPFlooder(sHost, sIP, iPort, sSubsite, chkWaitReply.Checked, iDelay, iTimeout, chkAllowRandom.Checked, chkAllowGzip.Checked, chkUseTerms.Checked);
 						http[a].Start();
 					}
 				}
@@ -618,7 +618,7 @@ namespace LOIC
 						int iaRequested = http[a].Requested;
 						int iaFailed = http[a].Failed;
 						http[a] = null;
-						http[a] = new HTTPFlooder(sHost, sIP, iPort, sSubsite, chkWaitReply.Checked, iDelay, iTimeout, chkAllowRandom.Checked, chkAllowGzip.Checked);
+						http[a] = new HTTPFlooder(sHost, sIP, iPort, sSubsite, chkWaitReply.Checked, iDelay, iTimeout, chkAllowRandom.Checked, chkAllowGzip.Checked, chkUseTerms.Checked);
 						http[a].Downloaded = iaDownloaded;
 						http[a].Requested = iaRequested;
 						http[a].Failed = iaFailed;

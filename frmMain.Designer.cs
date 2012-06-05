@@ -39,6 +39,7 @@ namespace LOIC
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.txtTarget = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.chkUseTerms = new System.Windows.Forms.CheckBox();
             this.chkAllowGzip = new System.Windows.Forms.CheckBox();
             this.label18 = new System.Windows.Forms.Label();
             this.chkAllowRandom = new System.Windows.Forms.CheckBox();
@@ -76,9 +77,9 @@ namespace LOIC
             this.label16 = new System.Windows.Forms.Label();
             this.TTip = new System.Windows.Forms.ToolTip(this.components);
             this.label24 = new System.Windows.Forms.Label();
+            this.enableHive = new System.Windows.Forms.RadioButton();
             this.tShowStats = new System.Windows.Forms.Timer(this.components);
             this.disableHive = new System.Windows.Forms.RadioButton();
-            this.enableHive = new System.Windows.Forms.RadioButton();
             this.label25 = new System.Windows.Forms.Label();
             this.txtIRCserver = new System.Windows.Forms.TextBox();
             this.txtIRCport = new System.Windows.Forms.TextBox();
@@ -205,6 +206,7 @@ namespace LOIC
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.chkUseTerms);
             this.groupBox3.Controls.Add(this.chkAllowGzip);
             this.groupBox3.Controls.Add(this.label18);
             this.groupBox3.Controls.Add(this.chkAllowRandom);
@@ -230,11 +232,22 @@ namespace LOIC
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "2. Attack options";
             // 
+            // chkUseTerms
+            // 
+            this.chkUseTerms.Checked = true;
+            this.chkUseTerms.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkUseTerms.Location = new System.Drawing.Point(640, 116);
+            this.chkUseTerms.Name = "chkUseTerms";
+            this.chkUseTerms.Size = new System.Drawing.Size(114, 18);
+            this.chkUseTerms.TabIndex = 30;
+            this.chkUseTerms.Text = "Use Terms";
+            this.TTip.SetToolTip(this.chkUseTerms, "Enable Gzip support for HTTP method");
+            // 
             // chkAllowGzip
             // 
             this.chkAllowGzip.Checked = true;
             this.chkAllowGzip.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkAllowGzip.Location = new System.Drawing.Point(640, 101);
+            this.chkAllowGzip.Location = new System.Drawing.Point(640, 97);
             this.chkAllowGzip.Name = "chkAllowGzip";
             this.chkAllowGzip.Size = new System.Drawing.Size(114, 18);
             this.chkAllowGzip.TabIndex = 29;
@@ -255,7 +268,7 @@ namespace LOIC
             this.chkAllowRandom.AutoSize = true;
             this.chkAllowRandom.Location = new System.Drawing.Point(65, 110);
             this.chkAllowRandom.Name = "chkAllowRandom";
-            this.chkAllowRandom.Size = new System.Drawing.Size(255, 18);
+            this.chkAllowRandom.Size = new System.Drawing.Size(249, 17);
             this.chkAllowRandom.TabIndex = 28;
             this.chkAllowRandom.Text = "Append random chars to the subsite / message";
             this.TTip.SetToolTip(this.chkAllowRandom, "Enable appending random chars to the subsite / message every request");
@@ -318,11 +331,9 @@ namespace LOIC
             // chkWaitReply
             // 
             this.chkWaitReply.AutoSize = true;
-            this.chkWaitReply.Checked = true;
-            this.chkWaitReply.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkWaitReply.Location = new System.Drawing.Point(640, 77);
             this.chkWaitReply.Name = "chkWaitReply";
-            this.chkWaitReply.Size = new System.Drawing.Size(91, 18);
+            this.chkWaitReply.Size = new System.Drawing.Size(88, 17);
             this.chkWaitReply.TabIndex = 7;
             this.chkWaitReply.Text = "Wait for reply";
             this.TTip.SetToolTip(this.chkWaitReply, "Don\'t disconnect before the server\'s started to answer");
@@ -392,14 +403,14 @@ namespace LOIC
             this.cbMethod.ForeColor = System.Drawing.Color.Azure;
             this.cbMethod.FormattingEnabled = true;
             this.cbMethod.Items.AddRange(new object[] {
+            "HTTP",
             "TCP",
-            "UDP",
-            "HTTP"});
+            "UDP"});
             this.cbMethod.Location = new System.Drawing.Point(370, 82);
             this.cbMethod.Name = "cbMethod";
             this.cbMethod.Size = new System.Drawing.Size(75, 22);
             this.cbMethod.TabIndex = 5;
-            this.cbMethod.Text = "TCP";
+            this.cbMethod.Text = "HTTP";
             this.TTip.SetToolTip(this.cbMethod, "What type of attack to launch");
             // 
             // txtPort
@@ -494,7 +505,7 @@ namespace LOIC
             this.lbFailed.TabIndex = 24;
             this.lbFailed.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.TTip.SetToolTip(this.lbFailed, "How many times (in total) the webserver didn\'t respond. High number = server down" +
-                    ".");
+        ".");
             // 
             // lbRequested
             // 
@@ -625,6 +636,18 @@ namespace LOIC
             this.TTip.SetToolTip(this.label24, "Go to official page");
             this.label24.Click += new System.EventHandler(this.label24_Click);
             // 
+            // enableHive
+            // 
+            this.enableHive.AutoSize = true;
+            this.enableHive.Location = new System.Drawing.Point(377, 15);
+            this.enableHive.Name = "enableHive";
+            this.enableHive.Size = new System.Drawing.Size(124, 18);
+            this.enableHive.TabIndex = 16;
+            this.enableHive.Text = "IRC Mode (HiveMind)";
+            this.TTip.SetToolTip(this.enableHive, "Fill the IRC options if you wish to use this mode");
+            this.enableHive.UseVisualStyleBackColor = true;
+            this.enableHive.CheckedChanged += new System.EventHandler(this.enableHive_CheckedChanged);
+            // 
             // tShowStats
             // 
             this.tShowStats.Interval = 10;
@@ -642,18 +665,6 @@ namespace LOIC
             this.disableHive.Text = "Manual Mode (Do it yourself)";
             this.disableHive.UseVisualStyleBackColor = true;
             this.disableHive.CheckedChanged += new System.EventHandler(this.disableHive_CheckedChanged);
-            // 
-            // enableHive
-            // 
-            this.enableHive.AutoSize = true;
-            this.enableHive.Location = new System.Drawing.Point(377, 15);
-            this.enableHive.Name = "enableHive";
-            this.enableHive.Size = new System.Drawing.Size(124, 18);
-            this.enableHive.TabIndex = 16;
-            this.enableHive.Text = "IRC Mode (HiveMind)";
-            this.TTip.SetToolTip(this.enableHive, "Fill the IRC options if you wish to use this mode");
-            this.enableHive.UseVisualStyleBackColor = true;
-            this.enableHive.CheckedChanged += new System.EventHandler(this.enableHive_CheckedChanged);
             // 
             // label25
             // 
@@ -835,5 +846,6 @@ namespace LOIC
 		private System.Windows.Forms.Label label8;
 		private System.Windows.Forms.Label label26;
 		private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.CheckBox chkUseTerms;
 	}
 }
